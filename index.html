@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Digital Clock</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #282c34;
+            color: white;
+            margin: 0;
+        }
+        .clock-container {
+            text-align: center;
+            font-size: 2rem;
+            padding: 20px;
+            border-radius: 10px;
+            background: #333;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="clock-container">
+        <div id="time"></div>
+        <div id="date"></div>
+    </div>
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            
+            const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const day = dayNames[now.getDay()];
+            const date = now.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+
+            document.getElementById("time").innerText = `${hours}:${minutes}:${seconds}`;
+            document.getElementById("date").innerText = `${day}, ${date}`;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html>
